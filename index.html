@@ -396,10 +396,21 @@
       });
 
       goalButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("pointerdown", (event) => {
+          if (event.button !== undefined && event.button !== 0) return;
           goal = Number(btn.dataset.goal);
           updateUI();
         });
+
+        btn.addEventListener("keydown", (event) => {
+          if (event.repeat) return;
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            goal = Number(btn.dataset.goal);
+            updateUI();
+          }
+        });
+
       });
 
       updateUI();
