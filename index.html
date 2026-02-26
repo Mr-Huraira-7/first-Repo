@@ -150,23 +150,8 @@
         box-shadow: 0 14px 24px -14px rgba(251, 191, 36, 0.8);
       }
 
-      .count-pop {
-        animation: count-pop 220ms ease-out;
-      }
-
       .float-shape {
         animation: float-shape 8s ease-in-out infinite;
-      }
-
-      @keyframes count-pop {
-        0% {
-          transform: scale(0.94);
-          filter: drop-shadow(0 0 0 rgba(251, 191, 36, 0));
-        }
-        100% {
-          transform: scale(1);
-          filter: drop-shadow(0 12px 14px rgba(251, 191, 36, 0.42));
-        }
       }
 
       @keyframes float-shape {
@@ -285,19 +270,19 @@
         <div class="mt-8 grid grid-cols-2 gap-3">
           <button
             id="decreaseBtn"
-            class="glass-btn rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
+            class="glass-btn touch-manipulation rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
           >
             -1
           </button>
           <button
             id="increaseBtn"
-            class="glass-btn-primary rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
+            class="glass-btn-primary touch-manipulation rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
           >
             +1
           </button>
           <button
             id="resetBtn"
-            class="glass-btn col-span-2 rounded-2xl border-dashed px-4 py-3 font-bold tracking-wide transition hover:bg-white/20"
+            class="glass-btn touch-manipulation col-span-2 rounded-2xl border-dashed px-4 py-3 font-bold tracking-wide transition hover:bg-white/20"
           >
             Reset
           </button>
@@ -350,10 +335,31 @@
       let goal = 33;
 
       function popCounter() {
-        countEl.classList.remove("count-pop");
-        // Reflow makes the same animation replay reliably.
-        void countEl.offsetWidth;
-        countEl.classList.add("count-pop");
+        countEl.animate(
+          [
+            { transform: "scale(0.95)", filter: "drop-shadow(0 0 0 rgba(251,191,36,0))" },
+            { transform: "scale(1)", filter: "drop-shadow(0 10px 12px rgba(251,191,36,0.35))" },
+          ],
+          { duration: 140, easing: "ease-out" }
+        );
+      }
+
+      function bindInstantPress(buttonId, action) {
+        const btn = document.getElementById(buttonId);
+
+        btn.addEventListener("pointerdown", (event) => {
+          if (event.button !== undefined && event.button !== 0) return;
+          action();
+        });
+
+        // Keyboard accessibility for Enter / Space.
+        btn.addEventListener("keydown", (event) => {
+          if (event.repeat) return;
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            action();
+          }
+        });
       }
 
       function updateUI() {
@@ -371,19 +377,19 @@
         });
       }
 
-      document.getElementById("increaseBtn").addEventListener("click", () => {
+      bindInstantPress("increaseBtn", () => {
         count += 1;
         updateUI();
         popCounter();
       });
 
-      document.getElementById("decreaseBtn").addEventListener("click", () => {
+      bindInstantPress("decreaseBtn", () => {
         count = Math.max(0, count - 1);
         updateUI();
         popCounter();
       });
 
-      document.getElementById("resetBtn").addEventListener("click", () => {
+      bindInstantPress("resetBtn", () => {
         count = 0;
         updateUI();
         popCounter();
