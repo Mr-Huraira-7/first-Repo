@@ -36,17 +36,19 @@
     </script>
     <style>
       :root {
-        --glass-border: rgba(255, 255, 255, 0.3);
+        --glass-border: rgba(241, 245, 244, 0.34);
+        --accent-gold: #e7d6a1;
+        --accent-emerald: #2fa38c;
       }
 
       .islamic-bg {
-        background: radial-gradient(circle at 16% 20%, rgba(250, 204, 21, 0.24), transparent 35%),
-          radial-gradient(circle at 84% 78%, rgba(16, 185, 129, 0.24), transparent 42%),
-          linear-gradient(145deg, #0f3f4b, #115e59 55%, #0f766e);
+        background: radial-gradient(circle at 15% 18%, rgba(231, 214, 161, 0.17), transparent 34%),
+          radial-gradient(circle at 84% 76%, rgba(47, 163, 140, 0.2), transparent 40%),
+          linear-gradient(145deg, #0c2f38, #11464a 55%, #0f5a56);
       }
 
       .pattern-overlay {
-        opacity: 0.32;
+        opacity: 0.18;
         background-image: linear-gradient(
             30deg,
             rgba(255, 255, 255, 0.11) 12%,
@@ -65,32 +67,32 @@
       }
 
       .glass-panel {
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.1));
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
         border: 1px solid var(--glass-border);
-        box-shadow: 0 24px 56px -24px rgba(2, 12, 28, 0.68), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        box-shadow: 0 24px 58px -26px rgba(2, 15, 24, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.34);
       }
 
       .glass-block {
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.09));
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.19), rgba(255, 255, 255, 0.07));
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
       }
 
       .control-btn {
-        background: rgba(255, 255, 255, 0.13);
+        background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.36);
-        color: #e2e8f0;
+        color: #e8f0ef;
       }
 
       .control-btn:hover {
-        background: rgba(255, 255, 255, 0.24);
+        background: rgba(255, 255, 255, 0.19);
       }
 
       .control-btn-primary {
-        background: linear-gradient(130deg, rgba(250, 204, 21, 0.95), rgba(16, 185, 129, 0.9));
-        border: 1px solid rgba(254, 249, 195, 0.95);
-        color: #083344;
-        box-shadow: 0 14px 24px -14px rgba(250, 204, 21, 0.85);
+        background: linear-gradient(130deg, var(--accent-gold), var(--accent-emerald));
+        border: 1px solid rgba(250, 245, 229, 0.82);
+        color: #0a3430;
+        box-shadow: 0 12px 22px -14px rgba(47, 163, 140, 0.66);
       }
 
       .control-btn-primary:hover {
@@ -99,124 +101,133 @@
 
       .goal-chip,
       .zikr-chip {
-        background: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.34);
-        color: #ecfeff;
+        color: #eef8f7;
       }
 
       .goal-chip:hover,
       .zikr-chip:hover {
-        background: rgba(255, 255, 255, 0.23);
+        background: rgba(255, 255, 255, 0.2);
       }
 
       .goal-btn-active,
       .zikr-btn-active {
-        background: linear-gradient(130deg, rgba(250, 204, 21, 0.95), rgba(16, 185, 129, 0.9));
-        border-color: rgba(254, 249, 195, 0.95);
-        color: #083344;
-        box-shadow: 0 12px 20px -14px rgba(250, 204, 21, 0.9);
+        background: linear-gradient(130deg, var(--accent-gold), var(--accent-emerald));
+        border-color: rgba(250, 245, 229, 0.9);
+        color: #0a3430;
+        box-shadow: 0 12px 20px -14px rgba(47, 163, 140, 0.7);
       }
 
       .arabic-text {
         font-family: "Noto Naskh Arabic", serif;
         direction: rtl;
-        line-height: 1.45;
+        line-height: 1.35;
       }
     </style>
   </head>
-  <body class="islamic-bg relative min-h-screen overflow-hidden p-4 font-body text-slate-100 sm:p-6">
+  <body
+    class="islamic-bg relative h-[100dvh] overflow-hidden p-2 font-body text-slate-100 sm:p-4"
+  >
     <div class="pattern-overlay pointer-events-none absolute inset-0"></div>
 
-    <main class="relative z-10 mx-auto flex min-h-[calc(100vh-2rem)] max-w-xl items-center">
-      <section class="glass-panel w-full rounded-[2rem] p-6 backdrop-blur-2xl sm:p-8">
+    <main class="relative z-10 mx-auto h-full max-w-xl">
+      <section
+        class="glass-panel flex h-full w-full flex-col gap-3 rounded-[1.5rem] p-3 backdrop-blur-2xl sm:gap-4 sm:rounded-[2rem] sm:p-4"
+      >
         <header class="text-center">
-          <p class="text-sm font-bold uppercase tracking-[0.24em] text-amber-100">Digital Tasbih</p>
-          <h1 class="mt-2 text-5xl font-extrabold text-white sm:text-6xl">Zikr Counter</h1>
-          <p class="mt-2 text-sm font-semibold text-cyan-50/90">Clean UI with instant response</p>
+          <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-amber-100 sm:text-xs">
+            Digital Tasbih
+          </p>
+          <h1 class="mt-1 text-3xl font-extrabold text-white sm:text-4xl">Zikr Counter</h1>
+          <p class="mt-1 text-xs font-semibold text-teal-50/90 sm:text-sm">Minimal Islamic theme</p>
         </header>
 
-        <div class="glass-block mt-6 rounded-3xl p-4">
+        <div class="glass-block rounded-2xl p-3 sm:rounded-3xl">
           <p class="text-center text-xs font-semibold uppercase tracking-[0.14em] text-cyan-50/90">
             Tasbih Select
           </p>
-          <div class="mt-3 grid gap-2 sm:grid-cols-3">
+          <div class="mt-2 grid grid-cols-3 gap-2">
             <button
               data-zikr-en="SubhanAllah"
               data-zikr-ar="سُبْحَانَ ٱللَّٰهِ"
-              class="zikr-btn zikr-chip touch-manipulation rounded-2xl px-3 py-3 text-center text-sm font-bold transition hover:-translate-y-0.5"
+              class="zikr-btn zikr-chip touch-manipulation rounded-xl px-2 py-2 text-center text-sm font-bold transition hover:-translate-y-0.5 sm:rounded-2xl"
             >
-              <span class="arabic-text block text-xl font-semibold">سُبْحَانَ ٱللَّٰهِ</span>
-              <span class="mt-1 block text-xs text-cyan-50/90">SubhanAllah</span>
+              <span class="arabic-text block text-lg font-semibold sm:text-xl">سُبْحَانَ ٱللَّٰهِ</span>
+              <span class="mt-0.5 block text-[11px] text-cyan-50/90 sm:text-xs">SubhanAllah</span>
             </button>
             <button
               data-zikr-en="Alhamdulillah"
               data-zikr-ar="ٱلْحَمْدُ لِلَّٰهِ"
-              class="zikr-btn zikr-chip touch-manipulation rounded-2xl px-3 py-3 text-center text-sm font-bold transition hover:-translate-y-0.5"
+              class="zikr-btn zikr-chip touch-manipulation rounded-xl px-2 py-2 text-center text-sm font-bold transition hover:-translate-y-0.5 sm:rounded-2xl"
             >
-              <span class="arabic-text block text-xl font-semibold">ٱلْحَمْدُ لِلَّٰهِ</span>
-              <span class="mt-1 block text-xs text-cyan-50/90">Alhamdulillah</span>
+              <span class="arabic-text block text-lg font-semibold sm:text-xl">ٱلْحَمْدُ لِلَّٰهِ</span>
+              <span class="mt-0.5 block text-[11px] text-cyan-50/90 sm:text-xs">Alhamdulillah</span>
             </button>
             <button
               data-zikr-en="Allahu Akbar"
               data-zikr-ar="ٱللَّٰهُ أَكْبَرُ"
-              class="zikr-btn zikr-chip touch-manipulation rounded-2xl px-3 py-3 text-center text-sm font-bold transition hover:-translate-y-0.5"
+              class="zikr-btn zikr-chip touch-manipulation rounded-xl px-2 py-2 text-center text-sm font-bold transition hover:-translate-y-0.5 sm:rounded-2xl"
             >
-              <span class="arabic-text block text-xl font-semibold">ٱللَّٰهُ أَكْبَرُ</span>
-              <span class="mt-1 block text-xs text-cyan-50/90">Allahu Akbar</span>
+              <span class="arabic-text block text-lg font-semibold sm:text-xl">ٱللَّٰهُ أَكْبَرُ</span>
+              <span class="mt-0.5 block text-[11px] text-cyan-50/90 sm:text-xs">Allahu Akbar</span>
             </button>
           </div>
         </div>
 
-        <div class="glass-block mt-4 rounded-3xl p-5 text-center">
-          <p class="text-xs font-semibold uppercase tracking-[0.14em] text-cyan-50/90">Current Tasbih</p>
-          <p id="zikrArabic" class="arabic-text mt-2 text-4xl font-bold text-amber-100">
-            سُبْحَانَ ٱللَّٰهِ
-          </p>
-          <p id="zikrEnglish" class="mt-1 text-sm font-semibold text-cyan-50/90">SubhanAllah</p>
+        <div class="grid grid-cols-2 gap-2 sm:gap-3">
+          <div class="glass-block rounded-2xl p-3 text-center sm:rounded-3xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-cyan-50/90">Current Tasbih</p>
+            <p id="zikrArabic" class="arabic-text mt-1 text-[1.7rem] font-bold text-amber-100 sm:text-3xl">
+              سُبْحَانَ ٱللَّٰهِ
+            </p>
+            <p id="zikrEnglish" class="mt-0.5 text-xs font-semibold text-cyan-50/90 sm:text-sm">SubhanAllah</p>
+          </div>
+          <div class="glass-block rounded-2xl p-3 text-center sm:rounded-3xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.14em] text-cyan-50/90">Current Count</p>
+            <p id="count" class="mt-1 text-5xl font-black tabular-nums text-amber-100 transition sm:text-6xl">
+              0
+            </p>
+            <p id="statusText" class="mt-0.5 text-xs font-semibold text-emerald-100/90">33 remaining</p>
+          </div>
         </div>
 
-        <div class="glass-block mt-4 rounded-3xl p-5 text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-cyan-50/90">Current Count</p>
-          <p id="count" class="mt-2 text-7xl font-black tabular-nums text-amber-100 transition">0</p>
-          <p id="statusText" class="mt-1 text-xs font-semibold text-emerald-100/90">33 remaining</p>
-        </div>
-
-        <div class="mt-6 grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-3 gap-2 sm:gap-3">
           <button
             id="decreaseBtn"
-            class="control-btn touch-manipulation rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5"
+            class="control-btn touch-manipulation rounded-xl px-3 py-2.5 text-base font-extrabold transition hover:-translate-y-0.5 sm:rounded-2xl sm:text-lg"
           >
             -1
           </button>
           <button
             id="increaseBtn"
-            class="control-btn-primary touch-manipulation rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5"
+            class="control-btn-primary touch-manipulation rounded-xl px-3 py-2.5 text-base font-extrabold transition hover:-translate-y-0.5 sm:rounded-2xl sm:text-lg"
           >
             +1
           </button>
           <button
             id="resetBtn"
-            class="control-btn touch-manipulation col-span-2 rounded-2xl border-dashed px-4 py-3 text-lg font-extrabold transition hover:bg-white/20"
+            class="control-btn touch-manipulation rounded-xl border-dashed px-3 py-2.5 text-base font-extrabold transition hover:bg-white/20 sm:rounded-2xl sm:text-lg"
           >
             Reset
           </button>
         </div>
 
-        <div class="glass-block mt-6 rounded-3xl p-4">
+        <div class="glass-block rounded-2xl p-3 sm:rounded-3xl">
           <div class="flex items-center justify-between text-sm font-bold text-cyan-50/90">
             <span>Goal: <span id="goalText">33</span></span>
             <span><span id="progressText">0</span>%</span>
           </div>
-          <div class="mt-3 h-3 overflow-hidden rounded-full bg-white/20">
+          <div class="mt-2 h-2.5 overflow-hidden rounded-full bg-white/20">
             <div
               id="progressBar"
               class="h-full w-0 rounded-full bg-gradient-to-r from-amber-300 via-brand-500 to-accent-500 transition-all duration-200"
             ></div>
           </div>
-          <div class="mt-4 grid grid-cols-3 gap-2">
+          <div class="mt-2 grid grid-cols-3 gap-2">
             <button
               data-goal="33"
-              class="goal-btn goal-chip touch-manipulation rounded-xl px-3 py-2 text-sm font-extrabold transition hover:-translate-y-0.5"
+              class="goal-btn goal-chip touch-manipulation rounded-xl px-3 py-1.5 text-sm font-extrabold transition hover:-translate-y-0.5"
             >
               33
             </button>
