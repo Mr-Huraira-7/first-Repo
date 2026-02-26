@@ -4,11 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tasbih Counter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            fontFamily: {
+              display: ["Sora", "sans-serif"],
+              body: ["Manrope", "sans-serif"],
+            },
             colors: {
               brand: {
                 50: "#f0f9ff",
@@ -17,82 +27,156 @@
                 500: "#0ea5e9",
                 700: "#0369a1",
               },
+              accent: {
+                400: "#34d399",
+                500: "#10b981",
+              },
             },
           },
         },
       };
     </script>
+    <style>
+      .soft-grid {
+        background-image: linear-gradient(
+            rgba(148, 163, 184, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+        background-size: 32px 32px;
+      }
+
+      .goal-btn-active {
+        background: linear-gradient(135deg, #0284c7, #10b981);
+        color: #ffffff;
+        border-color: transparent;
+        box-shadow: 0 12px 22px -12px rgba(2, 132, 199, 0.95);
+      }
+
+      .count-pop {
+        animation: count-pop 220ms ease-out;
+      }
+
+      .float-shape {
+        animation: float-shape 8s ease-in-out infinite;
+      }
+
+      @keyframes count-pop {
+        0% {
+          transform: scale(0.94);
+          filter: drop-shadow(0 0 0 rgba(14, 165, 233, 0));
+        }
+        100% {
+          transform: scale(1);
+          filter: drop-shadow(0 12px 12px rgba(14, 165, 233, 0.22));
+        }
+      }
+
+      @keyframes float-shape {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+    </style>
   </head>
   <body
-    class="min-h-screen bg-gradient-to-br from-brand-50 via-slate-100 to-brand-100 p-4 text-slate-800 sm:p-6"
+    class="soft-grid relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-100 via-brand-50 to-emerald-50 p-4 font-body text-slate-800 sm:p-6"
   >
+    <div
+      class="float-shape pointer-events-none absolute -left-24 top-8 h-72 w-72 rounded-full bg-brand-200/70 blur-3xl"
+    ></div>
+    <div
+      class="float-shape pointer-events-none absolute -bottom-24 right-[-4.5rem] h-80 w-80 rounded-full bg-emerald-200/70 blur-3xl"
+      style="animation-delay: 1.5s"
+    ></div>
     <main class="mx-auto flex min-h-[calc(100vh-2rem)] max-w-md items-center">
       <section
-        class="w-full rounded-3xl border border-white/70 bg-white/80 p-6 shadow-2xl shadow-slate-300/50 backdrop-blur sm:p-8"
+        class="relative z-10 w-full rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-[0_24px_60px_-24px_rgba(3,105,161,0.5)] backdrop-blur-xl sm:p-8"
       >
+        <div
+          class="pointer-events-none absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent"
+        ></div>
         <header class="text-center">
-          <p class="text-sm font-medium uppercase tracking-[0.2em] text-brand-700">
+          <p class="text-sm font-bold uppercase tracking-[0.24em] text-brand-700">
             Digital Tasbih
           </p>
-          <h1 class="mt-2 text-2xl font-bold text-slate-900">Zikr Counter</h1>
-          <p class="mt-1 text-sm text-slate-500">Simple, clean, and focused</p>
+          <h1 class="mt-2 font-display text-3xl font-extrabold text-slate-900">
+            Zikr Counter
+          </h1>
+          <p class="mt-1 text-sm font-medium text-slate-500">
+            Focused, calm, and visually uplifting
+          </p>
         </header>
 
-        <div class="mt-8 text-center">
-          <p class="text-sm font-medium text-slate-500">Current Count</p>
-          <p id="count" class="mt-2 text-7xl font-black tabular-nums text-slate-900">
+        <div
+          class="mt-8 rounded-3xl bg-gradient-to-b from-slate-50 to-white p-5 text-center ring-1 ring-slate-200/70 shadow-inner"
+        >
+          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">
+            Current Count
+          </p>
+          <p
+            id="count"
+            class="mt-2 font-display text-7xl font-black tabular-nums text-slate-900 transition duration-200"
+          >
             0
+          </p>
+          <p id="statusText" class="mt-1 text-xs font-semibold text-slate-500">
+            33 remaining
           </p>
         </div>
 
         <div class="mt-8 grid grid-cols-2 gap-3">
           <button
             id="decreaseBtn"
-            class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md active:translate-y-0"
+            class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-lg font-extrabold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 hover:shadow-md active:translate-y-0"
           >
             -1
           </button>
           <button
             id="increaseBtn"
-            class="rounded-2xl bg-brand-500 px-4 py-3 text-lg font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-md active:translate-y-0"
+            class="rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 px-4 py-3 text-lg font-extrabold text-white transition hover:-translate-y-0.5 hover:from-brand-700 hover:to-accent-500 hover:shadow-lg active:translate-y-0"
           >
             +1
           </button>
           <button
             id="resetBtn"
-            class="col-span-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-semibold text-slate-700 transition hover:bg-slate-100"
+            class="col-span-2 rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 font-bold text-slate-700 transition hover:bg-slate-100"
           >
             Reset
           </button>
         </div>
 
-        <div class="mt-7 rounded-2xl bg-slate-50 p-4">
-          <div class="flex items-center justify-between text-sm font-medium text-slate-600">
+        <div class="mt-7 rounded-3xl bg-slate-50/90 p-4 ring-1 ring-slate-200/70">
+          <div class="flex items-center justify-between text-sm font-semibold text-slate-600">
             <span>Goal: <span id="goalText">33</span></span>
             <span><span id="progressText">0</span>%</span>
           </div>
           <div class="mt-3 h-3 overflow-hidden rounded-full bg-slate-200">
             <div
               id="progressBar"
-              class="h-full w-0 rounded-full bg-brand-500 transition-all duration-300"
+              class="h-full w-0 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300"
             ></div>
           </div>
           <div class="mt-4 flex gap-2">
             <button
               data-goal="33"
-              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-50"
+              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-extrabold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-50"
             >
               33
             </button>
             <button
               data-goal="99"
-              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-50"
+              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-extrabold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-50"
             >
               99
             </button>
             <button
               data-goal="100"
-              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-50"
+              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-extrabold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-50"
             >
               100
             </button>
@@ -106,10 +190,18 @@
       const progressBar = document.getElementById("progressBar");
       const progressText = document.getElementById("progressText");
       const goalText = document.getElementById("goalText");
+      const statusText = document.getElementById("statusText");
       const goalButtons = document.querySelectorAll(".goal-btn");
 
       let count = 0;
       let goal = 33;
+
+      function popCounter() {
+        countEl.classList.remove("count-pop");
+        // Reflow makes the same animation replay reliably.
+        void countEl.offsetWidth;
+        countEl.classList.add("count-pop");
+      }
 
       function updateUI() {
         countEl.textContent = count;
@@ -117,21 +209,31 @@
         const progress = Math.min(Math.round((count / goal) * 100), 100);
         progressText.textContent = progress;
         progressBar.style.width = `${progress}%`;
+        statusText.textContent =
+          progress >= 100 ? "Goal complete, MashaAllah!" : `${goal - count} remaining`;
+
+        goalButtons.forEach((btn) => {
+          const isActive = Number(btn.dataset.goal) === goal;
+          btn.classList.toggle("goal-btn-active", isActive);
+        });
       }
 
       document.getElementById("increaseBtn").addEventListener("click", () => {
         count += 1;
         updateUI();
+        popCounter();
       });
 
       document.getElementById("decreaseBtn").addEventListener("click", () => {
         count = Math.max(0, count - 1);
         updateUI();
+        popCounter();
       });
 
       document.getElementById("resetBtn").addEventListener("click", () => {
         count = 0;
         updateUI();
+        popCounter();
       });
 
       goalButtons.forEach((btn) => {
