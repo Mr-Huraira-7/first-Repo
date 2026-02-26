@@ -37,20 +37,117 @@
       };
     </script>
     <style>
-      .soft-grid {
+      :root {
+        --glass-border: rgba(255, 255, 255, 0.32);
+      }
+
+      .islamic-canvas {
+        background: radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.24), transparent 42%),
+          radial-gradient(circle at 84% 12%, rgba(251, 191, 36, 0.18), transparent 36%),
+          radial-gradient(circle at 76% 82%, rgba(16, 185, 129, 0.22), transparent 44%),
+          linear-gradient(140deg, #052f3a 0%, #0b3f4f 44%, #0f3a2f 100%);
+      }
+
+      .islamic-pattern {
+        opacity: 0.4;
         background-image: linear-gradient(
-            rgba(148, 163, 184, 0.1) 1px,
-            transparent 1px
+            45deg,
+            rgba(255, 255, 255, 0.1) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(255, 255, 255, 0.1) 75%
           ),
-          linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
-        background-size: 32px 32px;
+          linear-gradient(
+            -45deg,
+            rgba(255, 255, 255, 0.1) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(255, 255, 255, 0.1) 75%
+          ),
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.22) 0 1px, transparent 1.2px);
+        background-size: 64px 64px, 64px 64px, 16px 16px;
+        background-position: 0 0, 32px 32px, 0 0;
+        mask-image: radial-gradient(circle at center, black 35%, transparent 82%);
+      }
+
+      .crescent {
+        position: absolute;
+        top: 3.25rem;
+        right: 8%;
+        width: 6.8rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 9999px;
+        background: radial-gradient(circle at 35% 35%, rgba(254, 243, 199, 0.95), rgba(234, 179, 8, 0.82));
+        box-shadow: 0 0 42px rgba(250, 204, 21, 0.45);
+      }
+
+      .crescent::after {
+        content: "";
+        position: absolute;
+        inset: 0.8rem;
+        border-radius: 9999px;
+        background: rgba(6, 58, 69, 0.96);
+        transform: translateX(1rem);
+      }
+
+      .star-dot {
+        position: absolute;
+        border-radius: 9999px;
+        background: rgba(254, 249, 195, 0.95);
+        box-shadow: 0 0 16px rgba(254, 249, 195, 0.8);
+        animation: twinkle 2.8s ease-in-out infinite;
+      }
+
+      .glass-panel {
+        background: linear-gradient(150deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1));
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 26px 70px -28px rgba(2, 12, 28, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.48);
+      }
+
+      .glass-block {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      }
+
+      .glass-btn {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.34);
+        color: #e2e8f0;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+      }
+
+      .glass-btn:hover {
+        background: rgba(255, 255, 255, 0.26);
+      }
+
+      .glass-btn-primary {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.92), rgba(16, 185, 129, 0.88));
+        border: 1px solid rgba(254, 249, 195, 0.85);
+        color: #083344;
+        box-shadow: 0 14px 26px -14px rgba(251, 191, 36, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.56);
+      }
+
+      .glass-btn-primary:hover {
+        filter: brightness(1.03);
+      }
+
+      .goal-chip {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.34);
+        color: #dbeafe;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      }
+
+      .goal-chip:hover {
+        background: rgba(255, 255, 255, 0.24);
       }
 
       .goal-btn-active {
-        background: linear-gradient(135deg, #0284c7, #10b981);
-        color: #ffffff;
-        border-color: transparent;
-        box-shadow: 0 12px 22px -12px rgba(2, 132, 199, 0.95);
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.95), rgba(16, 185, 129, 0.92));
+        color: #083344;
+        border-color: rgba(254, 249, 195, 0.95);
+        box-shadow: 0 14px 24px -14px rgba(251, 191, 36, 0.8);
       }
 
       .count-pop {
@@ -64,11 +161,11 @@
       @keyframes count-pop {
         0% {
           transform: scale(0.94);
-          filter: drop-shadow(0 0 0 rgba(14, 165, 233, 0));
+          filter: drop-shadow(0 0 0 rgba(251, 191, 36, 0));
         }
         100% {
           transform: scale(1);
-          filter: drop-shadow(0 12px 12px rgba(14, 165, 233, 0.22));
+          filter: drop-shadow(0 12px 14px rgba(251, 191, 36, 0.42));
         }
       }
 
@@ -81,50 +178,106 @@
           transform: translateY(-14px);
         }
       }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.35;
+          transform: scale(0.82);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
     </style>
   </head>
   <body
-    class="soft-grid relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-100 via-brand-50 to-emerald-50 p-4 font-body text-slate-800 sm:p-6"
+    class="islamic-canvas relative min-h-screen overflow-hidden p-4 font-body text-slate-100 sm:p-6"
   >
+    <div class="islamic-pattern pointer-events-none absolute inset-0"></div>
+    <div class="crescent pointer-events-none z-0"></div>
     <div
-      class="float-shape pointer-events-none absolute -left-24 top-8 h-72 w-72 rounded-full bg-brand-200/70 blur-3xl"
+      class="star-dot pointer-events-none z-0"
+      style="top: 4rem; left: 14%; width: 0.5rem; height: 0.5rem"
     ></div>
     <div
-      class="float-shape pointer-events-none absolute -bottom-24 right-[-4.5rem] h-80 w-80 rounded-full bg-emerald-200/70 blur-3xl"
+      class="star-dot pointer-events-none z-0"
+      style="top: 7rem; left: 22%; width: 0.25rem; height: 0.25rem; animation-delay: 0.7s"
+    ></div>
+    <div
+      class="star-dot pointer-events-none z-0"
+      style="top: 9rem; left: 82%; width: 0.4rem; height: 0.4rem; animation-delay: 1.2s"
+    ></div>
+    <div
+      class="float-shape pointer-events-none absolute -left-24 top-8 h-72 w-72 rounded-full bg-sky-300/35 blur-3xl"
+    ></div>
+    <div
+      class="float-shape pointer-events-none absolute -bottom-24 right-[-4.5rem] h-80 w-80 rounded-full bg-emerald-300/35 blur-3xl"
       style="animation-delay: 1.5s"
     ></div>
-    <main class="mx-auto flex min-h-[calc(100vh-2rem)] max-w-md items-center">
+    <svg
+      class="pointer-events-none absolute bottom-0 left-1/2 z-0 h-44 w-[120%] -translate-x-1/2 text-slate-100/20"
+      viewBox="0 0 1200 220"
+      aria-hidden="true"
+    >
+      <g fill="currentColor">
+        <rect x="0" y="150" width="1200" height="70"></rect>
+        <rect x="80" y="110" width="90" height="40"></rect>
+        <circle cx="125" cy="110" r="26"></circle>
+        <rect x="200" y="95" width="65" height="55"></rect>
+        <rect x="220" y="45" width="25" height="50"></rect>
+        <circle cx="232.5" cy="40" r="9"></circle>
+        <rect x="320" y="100" width="140" height="50"></rect>
+        <circle cx="390" cy="100" r="34"></circle>
+        <rect x="500" y="105" width="120" height="45"></rect>
+        <circle cx="560" cy="105" r="30"></circle>
+        <rect x="670" y="95" width="65" height="55"></rect>
+        <rect x="690" y="40" width="25" height="55"></rect>
+        <circle cx="702.5" cy="35" r="9"></circle>
+        <rect x="770" y="108" width="95" height="42"></rect>
+        <circle cx="817.5" cy="108" r="27"></circle>
+        <rect x="910" y="98" width="140" height="52"></rect>
+        <circle cx="980" cy="98" r="33"></circle>
+        <rect x="1080" y="110" width="70" height="40"></rect>
+        <circle cx="1115" cy="110" r="23"></circle>
+      </g>
+    </svg>
+    <main class="mx-auto flex min-h-[calc(100vh-2rem)] max-w-lg items-center">
       <section
-        class="relative z-10 w-full rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-[0_24px_60px_-24px_rgba(3,105,161,0.5)] backdrop-blur-xl sm:p-8"
+        class="glass-panel relative z-10 w-full rounded-[2rem] p-6 text-slate-100 backdrop-blur-2xl sm:p-8"
       >
         <div
-          class="pointer-events-none absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent"
+          class="pointer-events-none absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-amber-200/70 to-transparent"
         ></div>
         <header class="text-center">
-          <p class="text-sm font-bold uppercase tracking-[0.24em] text-brand-700">
+          <p class="text-sm font-bold uppercase tracking-[0.24em] text-amber-100">
             Digital Tasbih
           </p>
-          <h1 class="mt-2 font-display text-3xl font-extrabold text-slate-900">
+          <h1 class="mt-2 font-display text-3xl font-extrabold text-white">
             Zikr Counter
           </h1>
-          <p class="mt-1 text-sm font-medium text-slate-500">
-            Focused, calm, and visually uplifting
+          <p class="mt-1 text-sm font-semibold text-slate-100/90">
+            Islamic ambiance with calm glassmorphism
+          </p>
+          <p class="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100/95">
+            In remembrance of Allah
           </p>
         </header>
 
         <div
-          class="mt-8 rounded-3xl bg-gradient-to-b from-slate-50 to-white p-5 text-center ring-1 ring-slate-200/70 shadow-inner"
+          class="glass-block mt-8 rounded-3xl p-5 text-center"
         >
-          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">
+          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-100/85">
             Current Count
           </p>
           <p
             id="count"
-            class="mt-2 font-display text-7xl font-black tabular-nums text-slate-900 transition duration-200"
+            class="mt-2 font-display text-7xl font-black tabular-nums text-amber-100 transition duration-200"
           >
             0
           </p>
-          <p id="statusText" class="mt-1 text-xs font-semibold text-slate-500">
+          <p id="statusText" class="mt-1 text-xs font-semibold text-emerald-100/90">
             33 remaining
           </p>
         </div>
@@ -132,51 +285,51 @@
         <div class="mt-8 grid grid-cols-2 gap-3">
           <button
             id="decreaseBtn"
-            class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-lg font-extrabold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 hover:shadow-md active:translate-y-0"
+            class="glass-btn rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
           >
             -1
           </button>
           <button
             id="increaseBtn"
-            class="rounded-2xl bg-gradient-to-r from-brand-500 to-accent-500 px-4 py-3 text-lg font-extrabold text-white transition hover:-translate-y-0.5 hover:from-brand-700 hover:to-accent-500 hover:shadow-lg active:translate-y-0"
+            class="glass-btn-primary rounded-2xl px-4 py-3 text-lg font-extrabold transition hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
           >
             +1
           </button>
           <button
             id="resetBtn"
-            class="col-span-2 rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 font-bold text-slate-700 transition hover:bg-slate-100"
+            class="glass-btn col-span-2 rounded-2xl border-dashed px-4 py-3 font-bold tracking-wide transition hover:bg-white/20"
           >
             Reset
           </button>
         </div>
 
-        <div class="mt-7 rounded-3xl bg-slate-50/90 p-4 ring-1 ring-slate-200/70">
-          <div class="flex items-center justify-between text-sm font-semibold text-slate-600">
+        <div class="glass-block mt-7 rounded-3xl p-4">
+          <div class="flex items-center justify-between text-sm font-semibold text-slate-100/90">
             <span>Goal: <span id="goalText">33</span></span>
             <span><span id="progressText">0</span>%</span>
           </div>
-          <div class="mt-3 h-3 overflow-hidden rounded-full bg-slate-200">
+          <div class="mt-3 h-3 overflow-hidden rounded-full bg-white/20">
             <div
               id="progressBar"
-              class="h-full w-0 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 transition-all duration-300"
+              class="h-full w-0 rounded-full bg-gradient-to-r from-amber-300 via-brand-500 to-accent-500 transition-all duration-300"
             ></div>
           </div>
           <div class="mt-4 flex gap-2">
             <button
               data-goal="33"
-              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-extrabold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-50"
+              class="goal-btn goal-chip flex-1 rounded-xl px-3 py-2 text-sm font-extrabold transition hover:-translate-y-0.5"
             >
               33
             </button>
             <button
               data-goal="99"
-              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-extrabold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-50"
+              class="goal-btn goal-chip flex-1 rounded-xl px-3 py-2 text-sm font-extrabold transition hover:-translate-y-0.5"
             >
               99
             </button>
             <button
               data-goal="100"
-              class="goal-btn flex-1 rounded-xl border border-brand-200 bg-white px-3 py-2 text-sm font-extrabold text-brand-700 transition hover:-translate-y-0.5 hover:bg-brand-50"
+              class="goal-btn goal-chip flex-1 rounded-xl px-3 py-2 text-sm font-extrabold transition hover:-translate-y-0.5"
             >
               100
             </button>
